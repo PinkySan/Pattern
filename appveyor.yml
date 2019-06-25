@@ -9,12 +9,16 @@ environment:
   matrix:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       GENERATOR: "Visual Studio 15 2017 Win64"
-    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu1804
-      GENERATOR: "Unix Makefiles"
+    # - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu1804
+    #   GENERATOR: "Unix Makefiles"
   
-# fix the init-problem
-init: 
-  - cmd: pip install conan
+# fix the problem
+init:
+  - cmd: SET PATH=C:\Python37-x64\Scripts\;%PATH%
+
+
+install: 
+  - cmd: pip3 install conan
   - sh: sudo pip install conan
   - conan remote add catchorg https://api.bintray.com/conan/catchorg/Catch2  
 
