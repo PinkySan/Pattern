@@ -1,0 +1,35 @@
+configuration:
+    - Debug
+    - Release
+
+platform:
+    - x64
+
+environment:
+  matrix:
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      GENERATOR: "Visual Studio 15 2017 Win64"
+    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu1804
+      GENERATOR: "Unix Makefiles"
+  
+# fix the init-problem
+init: 
+  - cmd: pip install conan
+  - sh: sudo pip install conan
+  - conan remote add catchorg https://api.bintray.com/conan/catchorg/Catch2  
+
+before_build:
+  - mkdir build
+  - cd build
+  - cmd: conan install .. -s build_type=%CONFIGURATION%
+  - sh: conan install .. -s build_type=$CONFIGURATION -s compiler.libcxx=libstdc++11
+  
+build_script:
+  - conan build ..
+
+# changing into folder to suppress errorcode by failed ctest
+test_script:
+  - ps: ctest --build-config "$env:CONFIGURATION" -VV
+after_test:
+  - ps: $wc = New-Object 'System.Net.WebClient'
+  - ps: Get-ChildItem -Path ./ -Filter *.xml -File -Name -Recurse | ForEach-Object {$wc.UploadFi
