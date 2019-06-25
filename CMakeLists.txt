@@ -3,3 +3,6 @@ project(pattern LANGUAGES CXX VERSION 0.0.1)
 
 find_package(Catch2 REQUIRED)
 enable_testing()
+
+
+add_subdirectory(creational)
