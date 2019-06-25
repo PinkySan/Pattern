@@ -14,7 +14,7 @@ environment:
   
 # fix the init-problem
 init: 
-  - cmd: C:\Python37-x64\Scripts\pip3.exe install conan
+  - cmd: pip install conan
   - sh: sudo pip install conan
   - conan remote add catchorg https://api.bintray.com/conan/catchorg/Catch2  
 
