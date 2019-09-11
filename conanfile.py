@@ -14,7 +14,10 @@ class Pattern(ConanFile):
         self.build_requires("Catch2/2.9.2@catchorg/stable")
 
     def build(self):
-        cmake = CMake(self, toolset=self.env["compiler.toolset"])
+        if("compiler.toolset" in self.env):
+            cmake = CMake(self, toolset=self.env["compiler.toolset"])
+        else:
+            cmake = CMake(self)
         cmake.definitions["CMAKE_TOOLCHAIN_FILE"]=os.path.join(self.install_folder,"conan_paths.cmake")
         cmake.configure()
         cmake.build()
