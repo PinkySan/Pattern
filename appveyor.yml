@@ -14,10 +14,11 @@ environment:
 
 init:
   - cmd: SET PATH=C:\Python37-x64\Scripts\;%PATH%
+  - sh: sudo apt-get install python3-pip
 
 install: 
   - cmd: pip3 install conan
-  - sh: sudo python3 -m pip install conan
+  - sh: sudo pip3 install conan
   - conan remote add catchorg https://api.bintray.com/conan/catchorg/Catch2  
 
 before_build:
