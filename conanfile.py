@@ -11,7 +11,7 @@ class Pattern(ConanFile):
     generators = "cmake_paths"
 
     def build_requirements(self):
-        self.build_requires("Catch2/2.7.0@catchorg/stable")
+        self.build_requires("Catch2/2.9.2@catchorg/stable")
 
     def build(self):
         cmake = CMake(self, toolset=self.env["compiler.toolset"])
