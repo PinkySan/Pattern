@@ -1,0 +1,7 @@
+find_package(Catch2 REQUIRED)
+
+add_executable(messageFactoryTester messageFactoryTester.cpp)
+target_link_libraries(messageFactoryTester PRIVATE Catch2::Catch2 MessageFactory)
+add_test(NAME messageFactoryTester COMMAND messageFactoryTester)
+set_target_properties(messageFactoryTester PROPERTIES FOLDER creational/factory/test)
+target_compile_definitions(messageFactoryTester PRIVATE CATCH_CONFIG_MAIN)
