@@ -5,29 +5,32 @@ configuration:
 platform:
     - x64
 
+# only valid for ubuntu at the moment
+stack: python 3.7
+
 environment:
   matrix:
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      GENERATOR: "Visual Studio 15 2017 Win64"
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      GENERATOR: "Visual Studio 16 2019"
     - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu1804
       GENERATOR: "Unix Makefiles"
 
 init:
-  - cmd: SET PATH=C:\Python37-x64\Scripts\;%PATH%
-  - sh: sudo apt-get update
-  - sh: sudo apt-get -y install python3-pip
+  - cmd: SET PATH=C:\Python37-x64;C:\Python37-x64\Scripts;%PATH%
 
-
-install: 
-  - cmd: pip3 install conan
-  - sh: sudo pip3 install conan
-  - conan remote add catchorg https://api.bintray.com/conan/catchorg/Catch2  
+install:
+  - python --version      #needs to be here due to stack issues
+  - pip --version         #needs to be here due to stack issues
+  - pip install conan
+    
 
 before_build:
+  - conan remote add catchorg https://api.bintray.com/conan/catchorg/Catch2
+  - conan profile new default --detect
+  - sh: conan profile update settings.compiler.libcxx=libstdc++11 default
   - mkdir build
   - cd build
-  - cmd: conan install .. -s build_type=%CONFIGURATION%
-  - sh: conan install .. -s build_type=$CONFIGURATION -s compiler.libcxx=libstdc++11
+  - ps: conan install . -s build_type="$env:CONFIGURATION"
   
 build_script:
   - conan build ..
