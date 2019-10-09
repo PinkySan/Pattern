@@ -1,6 +1,5 @@
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
-
 #include <messageBuilder.h>
 
 TEST_CASE("InvalidMessage")
