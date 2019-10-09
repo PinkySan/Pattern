@@ -30,7 +30,7 @@ before_build:
   - sh: conan profile update settings.compiler.libcxx=libstdc++11 default
   - mkdir build
   - cd build
-  - ps: conan install . -s build_type="$env:CONFIGURATION"
+  - ps: conan install .. -s build_type="$env:CONFIGURATION"
   
 build_script:
   - conan build ..
