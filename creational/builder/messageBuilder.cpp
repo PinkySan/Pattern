@@ -1,17 +1,17 @@
 #include "messageBuilder.h"
 
 
-message invalidMessageBuilder::createMessage()
+message invalidMessageBuilder::createComplexMessage()
 {
     return message(messageType::INVALID);
 }
 
-message dataMessageBuilder::createMessage()
+message dataMessageBuilder::createComplexMessage()
 {
     return message(messageType::DATA);
 }
 
-message statusMessageBuilder::createMessage()
+message statusMessageBuilder::createComplexMessage()
 {
     return message(messageType::STATUS);
 }

@@ -23,6 +23,6 @@ public:
     message(messageType newType);
     message& setData(const std::string&& newData);
     message& setData(const std::string& newData);
-    auto getData() -> decltype(data);
-    auto getType() -> decltype(type);
+    auto getData() const -> decltype(data);
+    auto getType() const -> decltype(type);
 };  

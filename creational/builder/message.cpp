@@ -17,12 +17,12 @@ message& message::setData(const std::string& newData)
     return *this;
 }
 
-auto message::getData() -> decltype(data)
+auto message::getData() const -> decltype(data)
 {
     return data;
 }
 
-auto message::getType() -> decltype(type)
+auto message::getType() const -> decltype(type)
 {
     return type;
 }
