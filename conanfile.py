@@ -10,8 +10,8 @@ class Pattern(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     generators = "cmake_paths"
 
-    def build_requirements(self):
-        self.build_requires("Catch2/2.9.2@catchorg/stable")
+    def requirements(self):
+        self.requires("Catch2/2.9.2@catchorg/stable")
 
     def build(self):
         if("compiler.toolset" in self.env):
