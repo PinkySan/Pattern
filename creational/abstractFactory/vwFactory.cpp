@@ -29,7 +29,13 @@ car& vwCar::installEngine(std::shared_ptr<engine> carEngine)
 
 const std::string& vwCar::getName() const
 {
-    return name;
+    return _name;
+}
+
+car& vwCar::setName(const std::string& name)
+{
+    _name = name;
+    return *this;
 }
 
 unsigned int vwTires::getSizeInInch() const

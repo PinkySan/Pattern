@@ -17,6 +17,7 @@ public:
     car& mountTires(std::shared_ptr<tires> carTires) override;
     car& installEngine(std::shared_ptr<engine> carEngine) override;
     const std::string& getName() const override;
+    car& setName(const std::string& name) override;
 };
 
 class vwTires : public tires

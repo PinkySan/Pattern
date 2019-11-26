@@ -19,12 +19,14 @@ class car
     protected:
         std::shared_ptr<tires> _carTires;
         std::shared_ptr<engine> _carEngine;
-        std::string name;
+        std::string _name;
         
     public:
         virtual car& mountTires(std::shared_ptr<tires> carTires) = 0;
         virtual car& installEngine(std::shared_ptr<engine> carEngine) = 0;
+        virtual car& setName(const std::string& name) = 0;
         virtual const std::string& getName() const = 0;
+
 };
 
 
