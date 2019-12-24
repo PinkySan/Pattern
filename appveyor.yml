@@ -40,5 +40,4 @@ test_script:
   - ps: ctest --build-config "$env:CONFIGURATION" -VV -T Test
 after_test:
   - ps: $wc = New-Object 'System.Net.WebClient'
-  - ps: Get-ChildItem -Path ./ -Filter *.xml -File -Name -Recurse 
-  #| ForEach-Object {$wc.UploadFile("https://ci.appveyor.com/api/testresults/xunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path ./$_))}
+  - ps: Get-ChildItem -Path ./ -Filter *.xml -File -Name -Recurse | ForEach-Object {$wc.UploadFile("https://ci.appveyor.com/api/testresults/xunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\xunit-results.xml))}
