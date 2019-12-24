@@ -1,6 +1,6 @@
 #pragma once
-#include <string>
 #include <ostream>
+#include <string>
 
 enum class messageType
 {
@@ -10,37 +10,39 @@ enum class messageType
     UNKNOWN = 99
 };
 
-std::ostream& operator<<(std::ostream& os, const messageType& type);
+std::ostream &operator<<(std::ostream &os, const messageType &type);
 
 class message
 {
-private:
+  private:
     messageType type = messageType::UNKNOWN;
     std::string data;
-protected:
+
+  protected:
     message(messageType newType);
-public:
+
+  public:
     message() = delete;
-    message& setData(const std::string&& newData);
-    message& setData(const std::string& newData);
+    message &setData(const std::string &&newData);
+    message &setData(const std::string &newData);
     auto getData() const -> decltype(data);
     auto getType() const -> decltype(type);
 };
 
 class invalidMessage : public message
 {
-public:
+  public:
     invalidMessage();
 };
 
 class dataMessage : public message
 {
-public:
+  public:
     dataMessage();
 };
 
 class statusMessage : public message
 {
-public:
+  public:
     statusMessage();
 };

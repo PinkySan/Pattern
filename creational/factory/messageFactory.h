@@ -3,27 +3,27 @@
 
 class messageFactory
 {
-public:
+  public:
     virtual message create() = 0;
 };
 
 class InvalidMessageFactory : public messageFactory
 {
-public:
+  public:
     // Inherited via messageFactory
     virtual message create() override;
 };
 
 class DataMessageFactory : public messageFactory
 {
-public:
+  public:
     // Inherited via messageFactory
     virtual message create() override;
 };
 
 class StatusMessageFactory : public messageFactory
 {
-public:
+  public:
     // Inherited via messageFactory
     virtual message create() override;
 };

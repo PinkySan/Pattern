@@ -1,17 +1,16 @@
 #include "message.h"
 
-message::message(messageType newType):
-    type(newType)
+message::message(messageType newType) : type(newType)
 {
 }
 
-message& message::setData(const std::string&& newData)
+message &message::setData(const std::string &&newData)
 {
     data = std::move(newData);
     return *this;
 }
 
-message& message::setData(const std::string& newData)
+message &message::setData(const std::string &newData)
 {
     data = newData;
     return *this;
@@ -27,7 +26,7 @@ auto message::getType() const -> decltype(type)
     return type;
 }
 
-std::ostream& operator<<(std::ostream& os, const messageType& type)
+std::ostream &operator<<(std::ostream &os, const messageType &type)
 {
     switch (type)
     {
@@ -47,17 +46,14 @@ std::ostream& operator<<(std::ostream& os, const messageType& type)
     return os;
 }
 
-invalidMessage::invalidMessage():
-    message(messageType::INVALID)
+invalidMessage::invalidMessage() : message(messageType::INVALID)
 {
 }
 
-dataMessage::dataMessage():
-    message(messageType::DATA)
+dataMessage::dataMessage() : message(messageType::DATA)
 {
 }
 
-statusMessage::statusMessage():
-    message(messageType::STATUS)
+statusMessage::statusMessage() : message(messageType::STATUS)
 {
 }
