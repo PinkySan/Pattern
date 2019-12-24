@@ -1,11 +1,12 @@
 #define CATCH_CONFIG_MAIN
+#define CATCH_CONFIG_CONSOLE_WIDTH 300
 #include <catch2/catch.hpp>
 
 #include <carAbstractFactory.h>
 #include <memory>
 #include <vwFactory.h>
 
-TEST_CASE("abstractFactory", "vw")
+TEST_CASE("abstractFactory","vw")
 {
     std::unique_ptr<abstractCarFactory> factory = std::make_unique<vwFactory>();
     std::unique_ptr<car> myCar = factory->createCar();
