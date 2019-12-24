@@ -3,7 +3,7 @@ import os
 
 class Pattern(ConanFile):
     name = "pattern"
-    version = "0.0.1"
+    version = "0.0.2"
     license = "GPL"
     url = ""
     description = "C++ Pattern"
