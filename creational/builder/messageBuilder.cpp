@@ -3,15 +3,21 @@
 
 message invalidMessageBuilder::createComplexMessage()
 {
-    return message(messageType::INVALID);
+    message temp(messageType::INVALID);
+    temp.setData("invalid message");
+    return temp;
 }
 
 message dataMessageBuilder::createComplexMessage()
 {
-    return message(messageType::DATA);
+    message temp(messageType::DATA);
+    temp.setData("data message");
+    return temp;
 }
 
 message statusMessageBuilder::createComplexMessage()
-{
-    return message(messageType::STATUS);
+{   
+    message temp(messageType::STATUS);
+    temp.setData("status message");
+    return temp;
 }

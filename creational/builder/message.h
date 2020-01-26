@@ -2,7 +2,7 @@
 #include <string>
 #include <ostream>
 
-enum class messageType
+enum class messageType: uint8_t
 {
     INVALID,
     DATA,
@@ -19,7 +19,6 @@ private:
     std::string data;
 
 public:
-    message() = delete;
     message(messageType newType);
     message& setData(const std::string&& newData);
     message& setData(const std::string& newData);

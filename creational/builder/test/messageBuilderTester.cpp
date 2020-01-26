@@ -8,7 +8,7 @@ TEST_CASE("InvalidMessage")
     message mess = builder.createComplexMessage();
 
     REQUIRE(mess.getType() == messageType::INVALID);
-    REQUIRE(mess.getData().empty());
+    REQUIRE(mess.getData() == "invalid message");
 }
 
 TEST_CASE("InvalidMessageWithMove")
@@ -17,7 +17,7 @@ TEST_CASE("InvalidMessageWithMove")
     message mess(builder.createComplexMessage());
 
     REQUIRE(mess.getType() == messageType::INVALID);
-    REQUIRE(mess.getData().empty());
+    REQUIRE(mess.getData() == "invalid message");
 }
 
 TEST_CASE("InvalidMessageWithString")
@@ -35,7 +35,7 @@ TEST_CASE("DataMessage")
     message mess = builder.createComplexMessage();
 
     REQUIRE(mess.getType() == messageType::DATA);
-    REQUIRE(mess.getData().empty());
+    REQUIRE(mess.getData() == "data message");
 }
 
 TEST_CASE("StatusMessage")
@@ -44,5 +44,5 @@ TEST_CASE("StatusMessage")
     message mess = builder.createComplexMessage();
 
     REQUIRE(mess.getType() == messageType::STATUS);
-    REQUIRE(mess.getData().empty());
+    REQUIRE(mess.getData() == "status message");
 }
