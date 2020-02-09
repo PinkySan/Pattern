@@ -9,15 +9,18 @@ TEST_CASE("message")
     message mess(messageType::DATA);
     REQUIRE(mess.getData() == "");
     REQUIRE(mess.getType() == messageType::DATA);
+    SECTION("copy")
     {
         std::string data = "myInfo";
         mess.setData(data);
         REQUIRE(mess.getData() == data);
     }
+    SECTION("RAII")
     {
         mess.setData("newInformation");
         REQUIRE(mess.getData() == "newInformation");
     }
+    SECTION("std::move")
     {
         std::string data = "myInfoMoved";
         mess.setData(std::move(data));
