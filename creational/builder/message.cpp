@@ -5,12 +5,6 @@ message::message(messageType newType):
 {
 }
 
-message& message::setData(const std::string&& newData)
-{
-    data = std::move(newData);
-    return *this;
-}
-
 message& message::setData(const std::string& newData)
 {
     data = newData;
