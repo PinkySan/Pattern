@@ -1,16 +1,18 @@
 #include "messageFactory.h"
 
-message InvalidMessageFactory::create()
+message messageFactory::create(const messageType &type)
 {
-    return invalidMessage();
-}
-
-message DataMessageFactory::create()
-{
-    return dataMessage();
-}
-
-message StatusMessageFactory::create()
-{
-    return statusMessage();
+    switch (type)
+    {
+    case messageType::DATA:
+        return dataMessage();
+        break;
+    case messageType::INVALID:
+        return invalidMessage();
+        break;
+    case messageType::STATUS:
+        return statusMessage();
+    default:
+        throw(std::exception("Define messagetype"));
+    }
 }

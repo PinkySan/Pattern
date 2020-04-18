@@ -4,10 +4,15 @@
 #include <messageFactory.h>
 
 
+TEST_CASE("ThrowOnUnknownMessage")
+{
+    REQUIRE_THROWS(messageFactory::create(messageType::UNKNOWN));
+}
+
 TEST_CASE("InvalidMessage")
 {
-    InvalidMessageFactory factory;
-    message mess = factory.create();
+    messageFactory factory;
+    message mess = factory.create(messageType::INVALID);
 
     REQUIRE(mess.getType() == messageType::INVALID);
     REQUIRE(mess.getData().empty());
@@ -15,8 +20,8 @@ TEST_CASE("InvalidMessage")
 
 TEST_CASE("InvalidMessageWithMove")
 {
-    InvalidMessageFactory factory;
-    message mess(factory.create());
+    messageFactory factory;
+    message mess(factory.create(messageType::INVALID));
 
     REQUIRE(mess.getType() == messageType::INVALID);
     REQUIRE(mess.getData().empty());
@@ -24,8 +29,8 @@ TEST_CASE("InvalidMessageWithMove")
 
 TEST_CASE("InvalidMessageWithString")
 {
-    InvalidMessageFactory factory;
-    message mess = factory.create().setData("invalid string");
+    messageFactory factory;
+    message mess = factory.create(messageType::INVALID).setData("invalid string");
 
     REQUIRE(mess.getType() == messageType::INVALID);
     REQUIRE(mess.getData() == "invalid string");
@@ -33,8 +38,8 @@ TEST_CASE("InvalidMessageWithString")
 
 TEST_CASE("DataMessage")
 {
-    DataMessageFactory factory;
-    message mess = factory.create();
+    messageFactory factory;
+    message mess = factory.create(messageType::DATA);
 
     REQUIRE(mess.getType() == messageType::DATA);
     REQUIRE(mess.getData().empty());
@@ -42,8 +47,8 @@ TEST_CASE("DataMessage")
 
 TEST_CASE("StatusMessage")
 {
-    StatusMessageFactory factory;
-    message mess = factory.create();
+    messageFactory factory;
+    message mess = factory.create(messageType::STATUS);
 
     REQUIRE(mess.getType() == messageType::STATUS);
     REQUIRE(mess.getData().empty());

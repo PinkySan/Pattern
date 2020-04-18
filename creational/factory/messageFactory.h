@@ -4,26 +4,5 @@
 class messageFactory
 {
   public:
-    virtual message create() = 0;
-};
-
-class InvalidMessageFactory : public messageFactory
-{
-  public:
-    // Inherited via messageFactory
-    message create() override;
-};
-
-class DataMessageFactory : public messageFactory
-{
-  public:
-    // Inherited via messageFactory
-    message create() override;
-};
-
-class StatusMessageFactory : public messageFactory
-{
-  public:
-    // Inherited via messageFactory
-    message create() override;
+    static message create(const messageType& type);
 };
