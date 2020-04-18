@@ -6,7 +6,7 @@
 
 TEST_CASE("ThrowOnUnknownMessage")
 {
-    REQUIRE_THROWS(messageFactory::create(messageType::UNKNOWN));
+    REQUIRE_THROWS_WITH(messageFactory::create(messageType::UNKNOWN),"Define messagetype");
 }
 
 TEST_CASE("InvalidMessage")

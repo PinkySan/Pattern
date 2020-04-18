@@ -15,6 +15,6 @@ message messageFactory::create(const messageType &type)
         return statusMessage();
         break;
     default:
-        throw(std::exception("Define messagetype"));
+        throw("Define messagetype");
     }
 }
