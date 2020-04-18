@@ -1,4 +1,5 @@
 #include "messageFactory.h"
+#include <exception>
 
 message messageFactory::create(const messageType &type)
 {
@@ -12,6 +13,7 @@ message messageFactory::create(const messageType &type)
         break;
     case messageType::STATUS:
         return statusMessage();
+        break;
     default:
         throw(std::exception("Define messagetype"));
     }
