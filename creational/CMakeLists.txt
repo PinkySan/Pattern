@@ -1,3 +1,4 @@
 add_subdirectory(builder)
 add_subdirectory(factory)
 add_subdirectory(abstractFactory)
+add_subdirectory(singleton)
