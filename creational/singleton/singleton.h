@@ -3,14 +3,19 @@
 #pragma once
 #include <memory>
 
+template<typename T>
 class singleton
 {
-  private:
+protected:
     singleton() = default;
-    static std::shared_ptr<singleton> _instance;
 
-  public:
-    static std::shared_ptr<singleton> createInstance();
+public:
+    static T& createInstance()
+    {
+        static T _instance;
+        return _instance;
+    };
+
     singleton(const singleton&) = delete;
-    void operator=(const singleton &) = delete;
+    void operator=(const singleton&) = delete;
 };

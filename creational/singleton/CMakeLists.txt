@@ -1,4 +1,4 @@
-﻿add_library(singleton STATIC "singleton.cpp" "singleton.h")
-set_target_properties(singleton PROPERTIES FOLDER creational/singleton)
+﻿add_library(singleton INTERFACE)
+target_include_directories(singleton INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_subdirectory(test)
