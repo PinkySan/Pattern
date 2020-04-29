@@ -15,7 +15,4 @@ public:
         static T _instance;
         return _instance;
     };
-
-    singleton(const singleton&) = delete;
-    void operator=(const singleton&) = delete;
 };
