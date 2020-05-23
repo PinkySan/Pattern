@@ -1,0 +1,7 @@
+add_subdirectory(oldInterface)
+add_subdirectory(newInterface)
+
+add_library(oldInterfaceAdapter STATIC interfaceAdapter.cpp interfaceAdapter.h)
+target_link_libraries(oldInterfaceAdapter PRIVATE oldInterface)
+
+add_subdirectory(test)

@@ -8,3 +8,4 @@ set(CMAKE_CXX_STANDARD 14)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 add_subdirectory(creational)
+add_subdirectory(structural)
