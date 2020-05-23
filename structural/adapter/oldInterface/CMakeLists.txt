@@ -1,0 +1,1 @@
+add_library(oldInterface STATIC oldInterface.h oldInterface.cpp)
