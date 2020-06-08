@@ -3,5 +3,6 @@ add_subdirectory(newInterface)
 
 add_library(oldInterfaceAdapter STATIC interfaceAdapter.cpp interfaceAdapter.h)
 target_link_libraries(oldInterfaceAdapter PRIVATE oldInterface)
+set_target_properties(oldInterfaceAdapter PROPERTIES FOLDER structural/adapter)
 
 add_subdirectory(test)
