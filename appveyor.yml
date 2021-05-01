@@ -1,5 +1,4 @@
 configuration:
-    - Debug
     - Release
 
 platform:
@@ -33,7 +32,8 @@ before_build:
   - ps: conan install .. -s build_type="$env:CONFIGURATION"
   
 build_script:
-  - conan build ..
+  - cmake -DCMAKE_TOOLCHAIN_FILE:STRING="./conan_paths.cmake" ..
+  - cmake --build . 
 
 #changing into folder to suppress errorcode by failed ctest
 test_script:
