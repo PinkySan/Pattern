@@ -1,5 +1,5 @@
-configuration:
-    - Release
+# configuration:
+#     - Release
 
 platform:
     - x64
@@ -29,7 +29,7 @@ before_build:
   - sh: conan profile update settings.compiler.libcxx=libstdc++11 default
   - mkdir build
   - cd build
-  - ps: conan install .. -s build_type="$env:CONFIGURATION"
+  - ps: conan install .. -s build_type=Release
   
 build_script:
   - cmake -DCMAKE_TOOLCHAIN_FILE:STRING="./conan_paths.cmake" ..
@@ -37,7 +37,7 @@ build_script:
 
 #changing into folder to suppress errorcode by failed ctest
 test_script:
-  - ps: ctest --build-config "$env:CONFIGURATION" -VV
+  - ps: ctest --build-config Release -VV
 after_test:
   - ps: $wc = New-Object 'System.Net.WebClient'
   - ps: Get-ChildItem -Path ./ -Filter *.xml -File -Name -Recurse | ForEach-Object {$wc.UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path $_))}
