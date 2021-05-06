@@ -1,5 +1,6 @@
 [requires]
-Catch2/2.9.2@catchorg/stable
+catch2/2.13.6
 
 [generators]
 cmake_paths
+cmake_find_package

@@ -24,7 +24,6 @@ install:
     
 
 before_build:
-  - conan remote add catchorg https://api.bintray.com/conan/catchorg/Catch2
   - conan profile new default --detect
   - sh: conan profile update settings.compiler.libcxx=libstdc++11 default
   - mkdir build
