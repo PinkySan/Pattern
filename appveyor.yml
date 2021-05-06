@@ -25,10 +25,11 @@ install:
 
 before_build:
   - conan profile new default --detect
+  - conan remote list
   - sh: conan profile update settings.compiler.libcxx=libstdc++11 default
   - mkdir build
   - cd build
-  - ps: conan install .. -s build_type=Release
+  - conan install .. -s build_type=Release
   
 build_script:
   - cmake -DCMAKE_TOOLCHAIN_FILE:STRING="./conan_paths.cmake" ..
