@@ -1,38 +1,40 @@
 name: Ubuntu
 
 on: [push, pull_request]
-    
-env:
-  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
-  BUILD_TYPE: Release
 
 jobs:
   build:
-    # The CMake configure and build commands are platform agnostic and should work equally
-    # well on Windows or Mac.  You can convert this to a matrix build if you need
-    # cross-platform coverage.
-    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
-    runs-on: ubuntu-latest
+    name: Builder on ${{ matrix.os }} and ${{ matrix.build_type }}
+    runs-on: ${{ matrix.os }}
+    continue-on-error: true
+    strategy:
+      matrix:
+        os: [ubuntu-18.04, ubuntu-20.04]
+        build_type: [Release]
 
     steps:
     - uses: actions/checkout@v2
-    
-    - name: Get Conan
-      # You may pin to the exact commit or the version.
-      # uses: turtlebrowser/get-conan@4dc7e6dd45c8b1e02e909979d7cfc5ebba6ddbe2
-      uses: turtlebrowser/get-conan@v1.0
-      
-    - name: Download dependencies
-      working-directory: ${{github.workspace}}/build
-      run: conan install .. -s build_type=${{env.BUILD_TYPE}}
-
-    - name: Configure CMake
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/build/conan_paths.cmake
-
-    - name: Build
-      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
-
-    - name: Test
-      working-directory: ${{github.workspace}}/build
-      run: ctest -C ${{env.BUILD_TYPE}}
-      
+    - name: Setup python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install conan
+        conan profile new default --detect
+    - name: Display versions
+      run: |
+        cmake --version | head -n 1
+        gcc --version | head -n 1
+        conan --version | head -n 1
+        conan profile show default
+        cat /etc/lsb-release | grep "DISTRIB_DESCRIPTION"
+    - name: install conan dependencies
+      run: conan install . -if build -s compiler.libcxx=libstdc++11 -s build_type=${{matrix.build_type}}
+    - name: cmake
+      run: cmake -S . -B build -DCMAKE_BUILD_TYPE:STRING=${{matrix.build_type}} -DCMAKE_TOOLCHAIN_FILE:PATH=./build/conan_paths.cmake
+    - name: build
+      run: cmake --build build --parallel 10
+    - name: test
+      run: cd build ; ctest -j 10 --output-on-failure
